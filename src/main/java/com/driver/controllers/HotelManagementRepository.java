@@ -41,7 +41,7 @@ public class HotelManagementRepository {
             List<Facility>hotelList = hoteldb.get(hotelname).getFacilities();
 
 
-            if((maxsize==0 && mostfacilitiesHotel==null) || hotelList.size() > maxsize){
+            if(mostfacilitiesHotel==null || hotelList.size() > maxsize){
                 mostfacilitiesHotel = hoteldb.get(hotelname);
                 maxsize = hotelList.size();
             }
@@ -56,7 +56,7 @@ public class HotelManagementRepository {
 
         }
 
-        if(mostfacilitiesHotel==null){
+        if(maxsize==0){
             return "";
         }
 
