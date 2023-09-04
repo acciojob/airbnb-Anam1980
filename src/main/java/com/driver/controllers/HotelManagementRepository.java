@@ -35,21 +35,23 @@ public class HotelManagementRepository {
 
     public String getHotelWithMostFacilities(){
         Hotel mostfacilitiesHotel=null;
-
+        int maxsize =0;
         for(String hotelname : hoteldb.keySet()){
 
             List<Facility>hotelList = hoteldb.get(hotelname).getFacilities();
 
-            if(mostfacilitiesHotel==null || hotelList.size() > mostfacilitiesHotel.getFacilities().size()){
+            if(hotelList.size() > maxsize){
                 mostfacilitiesHotel = hoteldb.get(hotelname);
+                maxsize = hotelList.size();
             }
-            else if (hotelList.size()==mostfacilitiesHotel.getFacilities().size()) {
+            else if (hotelList.size()==maxsize) {
                 //lexographical compoarison
                 int comparison = hotelname.compareTo(mostfacilitiesHotel.getHotelName());
                 if(comparison<0){
                     mostfacilitiesHotel = hoteldb.get(hotelname);
                 }
             }
+
         }
 
         return mostfacilitiesHotel==null ? "" : mostfacilitiesHotel.getHotelName();
@@ -95,6 +97,9 @@ public class HotelManagementRepository {
     }
 
     public int getBooking(Integer aadharCard) {
+        if(aadharCard==null || !PersonBookingdb.containsKey(aadharCard)){
+            return 0;
+        }
         //check for the userId
        List<String>bookingList = PersonBookingdb.get(aadharCard);
 
