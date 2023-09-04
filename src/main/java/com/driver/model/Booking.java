@@ -14,13 +14,13 @@ public class Booking {
 
     private int amountToBePaid;
 
-    public Booking(String bookingId, int bookingAadharCard, int noOfRooms, String bookingPersonName, String hotelName) {
-        this.bookingId = bookingId;
-        this.bookingAadharCard = bookingAadharCard;
-        this.noOfRooms = noOfRooms;
-        this.bookingPersonName = bookingPersonName;
-        this.hotelName = hotelName;
-    }
+//    public Booking(String bookingId, int bookingAadharCard, int noOfRooms, String bookingPersonName, String hotelName) {
+//        this.bookingId = bookingId;
+//        this.bookingAadharCard = bookingAadharCard;
+//        this.noOfRooms = noOfRooms;
+//        this.bookingPersonName = bookingPersonName;
+//        this.hotelName = hotelName;
+//    }
 
     public Booking(int bookingAadharCard, int noOfRooms, String bookingPersonName, String hotelName) {
         this.bookingAadharCard = bookingAadharCard;
