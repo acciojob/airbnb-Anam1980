@@ -4,7 +4,7 @@ import com.driver.model.Booking;
 import com.driver.model.Facility;
 import com.driver.model.Hotel;
 import com.driver.model.User;
-import io.swagger.models.auth.In;
+
 
 import java.util.*;
 
@@ -35,29 +35,38 @@ public class HotelManagementRepository {
 
     public String getHotelWithMostFacilities(){
         Hotel mostfacilitiesHotel=null;
-        int maxsize =0;
+        int maxsize = 0;
         for(String hotelname : hoteldb.keySet()){
 
             List<Facility>hotelList = hoteldb.get(hotelname).getFacilities();
 
-            if(hotelList.size() > maxsize){
+
+            if((maxsize==0 && mostfacilitiesHotel==null) || hotelList.size() > maxsize){
                 mostfacilitiesHotel = hoteldb.get(hotelname);
                 maxsize = hotelList.size();
             }
             else if (hotelList.size()==maxsize) {
                 //lexographical compoarison
-                int comparison = hotelname.compareTo(mostfacilitiesHotel.getHotelName());
-                if(comparison<0){
-                    mostfacilitiesHotel = hoteldb.get(hotelname);
-                }
+
+                    int comparison = hotelname.compareTo(mostfacilitiesHotel.getHotelName());
+                    if (comparison < 0) {
+                        mostfacilitiesHotel = hoteldb.get(hotelname);
+                    }
             }
 
         }
 
-        return mostfacilitiesHotel==null ? "" : mostfacilitiesHotel.getHotelName();
+        if(mostfacilitiesHotel==null){
+            return "";
+        }
+
+        return  mostfacilitiesHotel.getHotelName();
     }
 
     public int bookARoom(Booking booking) {
+        if(booking==null){
+            return  -1;
+        }
         // Generate a booking ID using UUID
         String bookingID = UUID.randomUUID().toString();
 
