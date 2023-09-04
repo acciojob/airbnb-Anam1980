@@ -16,9 +16,9 @@ public class HotelManagementRepository {
     Map<Integer, List<String>>PersonBookingdb = new HashMap<>();
 
 
-    public String addHotel(Hotel hotel) throws Exception{
+    public String addHotel(Hotel hotel){
         if(hoteldb.containsKey(hotel.getHotelName())){
-            throw new Exception("FAILURE");
+            return "FAILURE";
         }
         hoteldb.put(hotel.getHotelName(), hotel);
 

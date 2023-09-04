@@ -24,7 +24,7 @@ public class HotelManagementController {
     HotelManagementService hotelManagementService = new HotelManagementService();
 
     @PostMapping("/add-hotel")
-    public String addHotel(@RequestBody Hotel hotel)throws Exception{
+    public String addHotel(@RequestBody Hotel hotel){
 
         //You need to add an hotel to the database
         //incase the hotelName is null or the hotel Object is null return an empty a FAILURE
