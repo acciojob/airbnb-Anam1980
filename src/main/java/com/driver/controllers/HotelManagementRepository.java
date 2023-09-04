@@ -94,7 +94,7 @@ public class HotelManagementRepository {
 
         //Add booking id to user booking list
         int user = booking.getBookingAadharCard();
-        List<String>list = PersonBookingdb.get(user);
+        List<String>list = PersonBookingdb.getOrDefault(user, new ArrayList<>());
         list.add(bookingID);
         PersonBookingdb.put(user, list);
 
@@ -106,13 +106,16 @@ public class HotelManagementRepository {
     }
 
     public int getBooking(Integer aadharCard) {
-        if(aadharCard==null || !PersonBookingdb.containsKey(aadharCard)){
-            return 0;
+        if (aadharCard == null || PersonBookingdb == null) {
+            return 0; // Handle null Aadhar card or null database gracefully
         }
-        //check for the userId
-       List<String>bookingList = PersonBookingdb.get(aadharCard);
 
-       return bookingList.size();
+        if (!PersonBookingdb.containsKey(aadharCard)) {
+            return 0; // Aadhar card not found in the database
+        }
+
+        List<String> bookingList = PersonBookingdb.get(aadharCard);
+        return bookingList.size();
     }
 
     public Hotel updateFacilities(List<Facility> newFacilities, String hotelName) {
